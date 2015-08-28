@@ -7,7 +7,8 @@ module.exports = {};
 module.exports.csv = function(filename, fn) {
 
     var _data,
-        steps = [];
+        steps = [],
+        doneFn = function(){};
 
     switch (typeof fn) {
 
@@ -52,10 +53,18 @@ module.exports.csv = function(filename, fn) {
                 fn.apply(null, row);
             });
         });
+
+        doneFn();
     };
 
     this.step = function(fn) {
         steps.push(fn);
+
+        return this;
+    };
+
+    this.done = function(fn){
+        doneFn = fn;
     };
 
     return this;
