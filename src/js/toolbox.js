@@ -70,6 +70,16 @@ module.exports.csv = function(filename, fn) {
     return this;
 };
 
+module.exports.view = {
+    table: function(arr){
+        console.log(Object.keys(arr[0]));
+        arr.forEach(function(row){
+            console.log(_.values(row));
+        });
+
+    }
+};
+
 // Source: https://github.com/Cloud9Trader/TechnicalIndicators/blob/master/ema.src.js
 module.exports.ema = function() {
     var exponent,

@@ -64,8 +64,6 @@ tb
             positions.push(position);
         }
     });
-    positions.forEach(function(pos){
-        console.log(pos);
-    });
 
+    tb.view.table(positions);
 });
