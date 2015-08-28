@@ -61,9 +61,10 @@ tb
 
     trades.forEach(function(trade){
         if(trade.side === Side.BUY){
-            positions.push({entry:trade.price, qty:trade.qty});
+            positions.push({buyDate: trade.date, entry:trade.price, qty:trade.qty});
         } else if(trade.side === Side.SELL){
             position = positions.pop();
+            position.sellDate = trade.date;
             position.exit = trade.price;
             position.pnl = position.exit - position.entry;
             positions.push(position);
