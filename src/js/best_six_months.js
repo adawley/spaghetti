@@ -39,16 +39,21 @@ var Order = function(symbol, date, side, price, qty){
 var trades = [];
 var positions = [];
 var inPosition = false;
+var symbol = 'dji';
+var filepath = [__dirname,'/../../test_data/',symbol,'.csv'].join('');
 
 tb
-.csv(__dirname + '/../../test_data/dji.csv', realize)
+.csv(filepath, realize)
 .step(function(date, open, high, low, close, volume, adj_close) {
+
     var d = new Date(date);
+
     if(d.getMonth() === 9 && inPosition === false){
-        trades.push(new Order('dji', date, Side.BUY, close, 100));
+        trades.push(new Order(symbol, date, Side.BUY, close, 100));
         inPosition = true;
+
     } else if(d.getMonth() == 4 && inPosition === true){
-        trades.push(new Order('dji', date, Side.SELL, close, 100));
+        trades.push(new Order(symbol, date, Side.SELL, close, 100));
         inPosition = false;
     }
 })
