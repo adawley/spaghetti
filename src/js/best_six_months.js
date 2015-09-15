@@ -18,10 +18,8 @@ var realize = function(err, data) {
 
 };
 
-var Side  = {
-    BUY:'b',
-    SELL:'s'
-};
+var Side  = tb.constants.Side,
+    Month = tb.constants.Month;
 
 var Order = function(symbol, date, side, price, qty){
     this.symbol = symbol;
@@ -48,11 +46,11 @@ tb
 
     var d = new Date(date);
 
-    if(d.getMonth() === 9 && inPosition === false){
+    if(d.getMonth() === Month.OCTOBER && !inPosition){
         trades.push(new Order(symbol, date, Side.BUY, close, 100));
         inPosition = true;
 
-    } else if(d.getMonth() == 4 && inPosition === true){
+    } else if(d.getMonth() === Month.MAY && inPosition){
         trades.push(new Order(symbol, date, Side.SELL, close, 100));
         inPosition = false;
     }

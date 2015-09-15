@@ -4,6 +4,27 @@ var fs = require('fs'),
 
 module.exports = {};
 
+module.exports.constants = {
+    Month: {
+        JANUARY:0,
+        FEBRUARY:1,
+        MARCH:2,
+        APRIL:3,
+        MAY:4,
+        JUNE:5,
+        JULY:6,
+        AUGUST:7,
+        SEPTEMBER:8,
+        OCTOBER:9,
+        NOVEMBER:10,
+        DECEMBER:11
+    },
+    Side: {
+        BUY:'b',
+        SELL:'s'
+    }
+};
+
 module.exports.csv = function(filename, fn) {
 
     var _data,
