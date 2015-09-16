@@ -4,6 +4,23 @@ var fs = require('fs'),
 
 module.exports = {};
 
+module.exports.arrange = {
+    byDate: function(err, data){
+        // remove header row, if there is one
+        if (data[0][0] === "Date") {
+            data.shift();
+        }
+
+        // make sure the dates go from oldest to newest
+        var date1 = new Date(data[0][0]),
+            date2 = new Date(data[1][0]);
+
+        if (date1 > date2) {
+            data.reverse();
+        }
+    }
+};
+
 module.exports.constants = {
     Month: {
         JANUARY:0,
@@ -87,6 +104,15 @@ module.exports.csv = function(filename, fn) {
     this.done = function(fn){
         doneFn = fn;
     };
+
+    return this;
+};
+
+module.exports.date = function(dateStr){
+    var d = new Date(dateStr);
+    this.month = d.getUTCMonth();
+    this.day = d.getUTCDate();
+    this.year = d.getFullYear();
 
     return this;
 };
